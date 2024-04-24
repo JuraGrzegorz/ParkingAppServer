@@ -66,16 +66,32 @@ namespace TheWebApiServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            _signInManager.AuthenticationScheme = IdentityConstants.ApplicationScheme;
-
             var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, true, lockoutOnFailure: true);
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
             {
-                return Unauthorized(result.ToString());
-            }
+                
+                var user = await _userManager.FindByEmailAsync(login.Email);
+                await _signInManager.SignInAsync(user, isPersistent: true); // user to zmienna reprezentująca zalogowanego użytkownika
 
-            return Ok();
+                // Pobierz ciasteczko sesji
+                var sessionCookie = HttpContext.Response.Headers["Set-Cookie"];
+
+                return Ok(new { message = "Login successful", sessionCookie });
+            }
+            else if (result.IsLockedOut)
+            {
+                return StatusCode(429, "Too many failed login attempts. Your account has been locked out. Please try again later.");
+            }
+            else if (result.RequiresTwoFactor)
+            {
+                // Redirect to two-factor authentication page or return custom response
+                return StatusCode(403, "Two-factor authentication required.");
+            }
+            else
+            {
+                return Unauthorized("Invalid email or password.");
+            }
         }
 
 
