@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Juras\\Desktop\\2024\\the\\TheWebApiServer\\TheWebApiServer.csproj": {}
+    "C:\\Users\\Juras\\Desktop\\2024\\the\\ParkingAppServer\\TheWebApiServer\\TheWebApiServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Juras\\Desktop\\2024\\the\\TheWebApiServer\\TheWebApiServer.csproj": {
+    "C:\\Users\\Juras\\Desktop\\2024\\the\\ParkingAppServer\\TheWebApiServer\\TheWebApiServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Juras\\Desktop\\2024\\the\\TheWebApiServer\\TheWebApiServer.csproj",
+        "projectUniqueName": "C:\\Users\\Juras\\Desktop\\2024\\the\\ParkingAppServer\\TheWebApiServer\\TheWebApiServer.csproj",
         "projectName": "TheWebApiServer",
-        "projectPath": "C:\\Users\\Juras\\Desktop\\2024\\the\\TheWebApiServer\\TheWebApiServer.csproj",
+        "projectPath": "C:\\Users\\Juras\\Desktop\\2024\\the\\ParkingAppServer\\TheWebApiServer\\TheWebApiServer.csproj",
         "packagesPath": "C:\\Users\\Juras\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Juras\\Desktop\\2024\\the\\TheWebApiServer\\obj\\",
+        "outputPath": "C:\\Users\\Juras\\Desktop\\2024\\the\\ParkingAppServer\\TheWebApiServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Juras\\AppData\\Roaming\\NuGet\\NuGet.Config",

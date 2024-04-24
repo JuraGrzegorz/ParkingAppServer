@@ -55,9 +55,6 @@ namespace TheWebApiServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            /*await _emailSender.SendEmailAsync(user, "Confirm your email",
-                "Please confirm your email address by clicking this link.");
-*/
             return Ok("User registered successfully.");
         }
 

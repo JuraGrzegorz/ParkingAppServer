@@ -6,6 +6,16 @@ using TheWebApiServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAny",
+                          policy =>
+                          {
+                              policy.AllowAnyOrigin()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                          });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -46,6 +56,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowAny");
 app.UseAuthorization();
 
 app.MapControllers();

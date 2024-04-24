@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yHO8h2o28MhawymIwKnFfcKQI+aASih7QeDNnWdV78mXSDZd9+8RkpVXSLOQ/wqnIs8/WwvPhZ7cYB2jwLem4g==",
+  "dgSpecHash": "WqsTVJIPrx+TtHPQZtvhP5sYwKlr6bD6p6Q7p6Ro+dmNqDGoI6UbGbY87WQK9JXc+wE3GKi15Ni7PPqbnr/1Hw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Juras\\Desktop\\2024\\the\\TheWebApiServer\\TheWebApiServer.csproj",
+  "projectFilePath": "C:\\Users\\Juras\\Desktop\\2024\\the\\ParkingAppServer\\TheWebApiServer\\TheWebApiServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Juras\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Juras\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
