@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
@@ -70,14 +73,12 @@ namespace TheWebApiServer.Controllers
 
             if (result.Succeeded)
             {
-                
                 var user = await _userManager.FindByEmailAsync(login.Email);
-                await _signInManager.SignInAsync(user, isPersistent: true); // user to zmienna reprezentująca zalogowanego użytkownika
+                await _signInManager.SignInAsync(user, isPersistent: true);
 
-                // Pobierz ciasteczko sesji
                 var sessionCookie = HttpContext.Response.Headers["Set-Cookie"];
 
-                return Ok(new { message = "Login successful", sessionCookie });
+                return Ok(new { message = "Login successful"});
             }
             else if (result.IsLockedOut)
             {
@@ -85,7 +86,6 @@ namespace TheWebApiServer.Controllers
             }
             else if (result.RequiresTwoFactor)
             {
-                // Redirect to two-factor authentication page or return custom response
                 return StatusCode(403, "Two-factor authentication required.");
             }
             else
@@ -93,7 +93,6 @@ namespace TheWebApiServer.Controllers
                 return Unauthorized("Invalid email or password.");
             }
         }
-
 
         [HttpPost("logout")]
         [Authorize]
