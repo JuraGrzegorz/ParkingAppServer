@@ -42,6 +42,68 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TheWebApiServer.Controllers.ParkingController",
+    "Method": "GetParkingSpaceHistory",
+    "RelativePath": "Parking/GetParkingSpaceHistory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.ParkingController",
+    "Method": "GetParkingStatus",
+    "RelativePath": "Parking/GetParkingStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.ParkingController",
+    "Method": "GetTicket",
+    "RelativePath": "Parking/GetTicket",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.ParkingController",
+    "Method": "SendCarPhoto",
+    "RelativePath": "Parking/SendCarPhoto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "photo",
+        "Type": "System.Byte[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.ParkingController",
+    "Method": "UserAddCarAsync",
+    "RelativePath": "Parking/UserAddCar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registration",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TheWebApiServer.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
