@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TheWebApiServer.Data;
 using TheWebApiServer.Model;
+using TheWebApiServer.Requests;
 
 namespace TheWebApiServer.Controllers
 {
@@ -13,26 +15,49 @@ namespace TheWebApiServer.Controllers
     {
         private readonly DataContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        
         public ParkingController(DataContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-
         [HttpPost("UserAddCar")]
         [Authorize]
-        public async Task<IActionResult> UserAddCarAsync([FromBody]string registration)
+        public async Task<IActionResult> UserAddCarAsync([FromBody] AddUserCar model)
         {
-
+           
             var user = await _userManager.GetUserAsync(HttpContext.User);
             _context.cars.Add(new Cars
             {
-                Registration = registration,
+                Registration = model.Registration,
+                CarBrand=model.CarBrand,
+                CarModel=model.CarModel,
                 UserId = (await _userManager.GetUserAsync(HttpContext.User)).Id
             });
             _context.SaveChanges();
-            return Ok("Add succesfully added");
+            return Ok("Car succesfully added");
+        }
+
+        [HttpGet("GetUserCars")]
+        [Authorize]
+        public async Task<IActionResult> GetUserCarsAsync()
+        {
+            //dodac validacje aut
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var userCars = _context.cars
+                .Where(x => x.UserId == user.Id)
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Registration,
+                    x.CarBrand,
+                    x.CarModel
+
+                })
+                .ToListAsync();
+                
+            return Ok(userCars);
         }
 
 

@@ -73,6 +73,22 @@
   },
   {
     "ContainingType": "TheWebApiServer.Controllers.ParkingController",
+    "Method": "LeavePlace",
+    "RelativePath": "Parking/LeavePlace",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CarId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.ParkingController",
     "Method": "SendCarPhoto",
     "RelativePath": "Parking/SendCarPhoto",
     "HttpMethod": "POST",
