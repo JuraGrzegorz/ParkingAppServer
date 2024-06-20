@@ -515,3 +515,9 @@ C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\obj\Release\net
 C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\obj\Release\net8.0\TheWebApiServer.pdb
 C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\obj\Release\net8.0\TheWebApiServer.genruntimeconfig.cache
 C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\obj\Release\net8.0\ref\TheWebApiServer.dll
+C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\bin\Release\net8.0\Google.Apis.dll
+C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\bin\Release\net8.0\Google.Apis.Auth.dll
+C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\bin\Release\net8.0\Google.Apis.Core.dll
+C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\bin\Release\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\bin\Release\net8.0\System.Management.dll
+C:\Users\Juras\Desktop\2024\the\ParkingAppServer\TheWebApiServer\bin\Release\net8.0\runtimes\win\lib\net7.0\System.Management.dll

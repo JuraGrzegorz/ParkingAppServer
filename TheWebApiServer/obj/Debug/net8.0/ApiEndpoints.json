@@ -17,6 +17,22 @@
   },
   {
     "ContainingType": "TheWebApiServer.Controllers.IdentityApiController",
+    "Method": "LogInByGoogle",
+    "RelativePath": "IdentityApi/LogInByGoogle",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "googleAuthToken",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.IdentityApiController",
     "Method": "Logout",
     "RelativePath": "IdentityApi/logout",
     "HttpMethod": "POST",
@@ -37,6 +53,38 @@
         "Name": "registration",
         "Type": "Microsoft.AspNetCore.Identity.Data.RegisterRequest",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.ParkingController",
+    "Method": "DeleteUserCar",
+    "RelativePath": "Parking/DeleteUserCar",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "TheWebApiServer.Requests.DeleteUserCar",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.ParkingController",
+    "Method": "GetCurParkingSpaceHistory",
+    "RelativePath": "Parking/GetCurParkingSpaceHistory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "parkingPlaceId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -68,6 +116,22 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
+    "Parameters": [
+      {
+        "Name": "carId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.ParkingController",
+    "Method": "GetUserCars",
+    "RelativePath": "Parking/GetUserCars",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
   },
@@ -80,8 +144,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "CarId",
-        "Type": "System.Int32",
+        "Name": "model",
+        "Type": "TheWebApiServer.Requests.LeavePlaceByCar",
         "IsRequired": true
       }
     ],
@@ -89,15 +153,15 @@
   },
   {
     "ContainingType": "TheWebApiServer.Controllers.ParkingController",
-    "Method": "SendCarPhoto",
-    "RelativePath": "Parking/SendCarPhoto",
+    "Method": "UpdateUserCar",
+    "RelativePath": "Parking/UpdateUserCar",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "photo",
-        "Type": "System.Byte[]",
+        "Name": "model",
+        "Type": "TheWebApiServer.Requests.UpdateUserCars",
         "IsRequired": true
       }
     ],
@@ -105,38 +169,60 @@
   },
   {
     "ContainingType": "TheWebApiServer.Controllers.ParkingController",
-    "Method": "UserAddCarAsync",
+    "Method": "UserAddCar",
     "RelativePath": "Parking/UserAddCar",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "registration",
-        "Type": "System.String",
+        "Name": "model",
+        "Type": "TheWebApiServer.Requests.AddUserCar",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TheWebApiServer.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
+    "ContainingType": "TheWebApiServer.Controllers.PeypalPeymentsController",
+    "Method": "CreateOrder",
+    "RelativePath": "PeypalPeyments/create-order",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cart",
+        "Type": "TheWebApiServer.Requests.Cart",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.PeypalPeymentsController",
+    "Method": "GetUserAmount",
+    "RelativePath": "PeypalPeyments/GetUserAmount",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TheWebApiServer.Controllers.PeypalPeymentsController",
+    "Method": "OnPostCompleteOrder",
+    "RelativePath": "PeypalPeyments/OnPostCompleteOrder",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[TheWebApiServer.WeatherForecast, TheWebApiServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "data",
+        "Type": "System.Text.Json.Nodes.JsonObject",
+        "IsRequired": true
       }
-    ]
+    ],
+    "ReturnTypes": []
   }
 ]

@@ -14,5 +14,7 @@ namespace TheWebApiServer.Data
         public DbSet<OccupiedParkingPlace> occupiedParkingPlace { get; set; }
         public DbSet<ParkingPlace> parkingPlace {  get; set; }
         public DbSet<Payments> payments {  get; set; }
+        public DbSet<Treasure > treasure { get; set; }
+
     }
 }

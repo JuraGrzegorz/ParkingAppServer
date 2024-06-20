@@ -21,6 +21,7 @@
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://www.nuget.org/api/v2/curated-feeds/microsoftdotnet/": {}
         },
         "frameworks": {
@@ -44,6 +45,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.68.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.2, )"
@@ -90,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

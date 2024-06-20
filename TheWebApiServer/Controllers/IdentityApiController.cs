@@ -1,11 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.SqlServer.Server;
+using TheWebApiServer.Data;
+using TheWebApiServer.Model;
+using TheWebApiServer.Requests;
 
 namespace TheWebApiServer.Controllers
 {
@@ -18,15 +28,17 @@ namespace TheWebApiServer.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailSender<IdentityUser> _emailSender;
-
+        private readonly DataContext _context;
         public IdentityApiController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IEmailSender<IdentityUser> emailSender)
+            IEmailSender<IdentityUser> emailSender,
+            DataContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [HttpPost("register")]
@@ -58,6 +70,16 @@ namespace TheWebApiServer.Controllers
                 return BadRequest(ModelState);
             }
 
+            //dodawnaie do roli
+            await _userManager.AddToRoleAsync(user, "User");
+            var curTreauser = new Treasure
+            {
+                User = user,
+                Amount=0
+            };
+            await _context.treasure.AddAsync(curTreauser);
+            await _context.SaveChangesAsync();
+
             return Ok("User registered successfully.");
         }
 
@@ -76,9 +98,11 @@ namespace TheWebApiServer.Controllers
                 var user = await _userManager.FindByEmailAsync(login.Email);
                 await _signInManager.SignInAsync(user, isPersistent: true);
 
-                var sessionCookie = HttpContext.Response.Headers["Set-Cookie"];
 
-                return Ok(new { message = "Login successful"});
+                return Ok(new {
+                    accountType=await _userManager.GetRolesAsync(user),
+                    userName=user.UserName
+                });
             }
             else if (result.IsLockedOut)
             {
@@ -100,6 +124,92 @@ namespace TheWebApiServer.Controllers
         {
             await _signInManager.SignOutAsync().ConfigureAwait(false);
             return Ok();
+        }
+
+
+        [HttpPost("LogInByGoogle")]
+        public async Task<IActionResult> LogInByGoogle([FromBody] string googleAuthToken)
+        {
+            try
+            {
+                var payload = await GoogleJsonWebSignature.ValidateAsync(googleAuthToken);
+
+                string userId = payload.Subject;
+                string email = payload.Email;
+                string name = payload.Name;
+               
+
+                // Check if the user already exists in the database by Google ID
+                var user = await _userManager.FindByLoginAsync("Google", userId);
+
+                if (user == null)
+                {
+                   
+                    user = await _userManager.FindByEmailAsync(email);
+
+                    if (user == null)
+                    {
+                        // Create a new user if not exists
+                        user = new IdentityUser
+                        {
+                            UserName = email,
+                            Email = email,
+                        };
+
+                        var result = await _userManager.CreateAsync(user);
+                        if (!result.Succeeded)
+                        {
+                            return BadRequest(result.Errors);
+                        }
+                        await _userManager.AddToRoleAsync(user, "User");
+
+                        var info = new UserLoginInfo("Google", userId, "Google");
+                        await _userManager.AddLoginAsync(user, info);
+                        await _userManager.AddToRoleAsync(user, "User");
+                        var curTreauser = new Treasure
+                        {
+                            User = user,
+                            Amount = 0
+                        };
+                        await _context.treasure.AddAsync(curTreauser);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        var info = new UserLoginInfo("Google", userId, "Google");
+                        var result = await _userManager.AddLoginAsync(user, info);
+
+                        if (!result.Succeeded)
+                        {
+                            return BadRequest(result.Errors);
+                        }
+                    }
+                }
+                else
+                {
+                    // Update existing user information
+                   
+
+                   /* var result = await _userManager.UpdateAsync(user);
+                    if (!result.Succeeded)
+                    {
+                        return BadRequest(result.Errors);
+                    }*/
+                }
+
+                await _signInManager.SignInAsync(user, true);
+
+
+                return Ok(new
+                {
+                    accountType = await _userManager.GetRolesAsync(user),
+                    userName = user.UserName
+                });
+            }
+            catch (InvalidJwtException)
+            {
+                return Unauthorized(new { Message = "Invalid Google token." });
+            }
         }
     }
 }
